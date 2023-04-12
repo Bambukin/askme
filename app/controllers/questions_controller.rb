@@ -1,6 +1,14 @@
 class QuestionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def show
+    @question = Question.find(params[:id])
+  end
+
+  def index
+    @questions = Question.all
+  end
+
   def create
     Question.create(
       body: params[:question][:body],
