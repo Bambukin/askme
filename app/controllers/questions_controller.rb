@@ -1,11 +1,17 @@
 class QuestionsController < ApplicationController
   # skip_before_action :verify_authenticity_token
-  before_action :set_question, only: %i[update show destroy edit]
+  before_action :set_question, only: %i[update hide show destroy edit]
 
   def show; end
 
   def index
     @questions = Question.all
+  end
+
+  def hide
+    @question.update(hidden: true)
+
+    redirect_to questions_path
   end
 
   def create
