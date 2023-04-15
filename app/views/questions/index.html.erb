@@ -1,14 +1,30 @@
 <div class="container">
-  <h2 class="title-lg mb">Вопросы</h2>
-
-  <% @questions.each do |question|%>
-    <div class= "<%= 'hidden' if question.hidden? %>">
-    <p class="mb-sm"><%= link_to "Вопрос #{question.id}", question_path(id: question.id)%></p>
-    </div>
-  <% end %>
-
   <p class="mt">
     <%= link_to "Создать новый вопрос", new_question_path, class: 'button button-main' %>
   </p>
 
+  <p class="mt">
+    <%= render 'form', question: @question %>
+  </p>
 </div>
+
+<div class="container mt-sm">
+  <h2 class="title-lg">
+    <%= @questions.count %>
+    <%= inclination(@questions.count, 'вопрос', 'вопроса', 'вопросов') %>
+  </h2>
+</div>
+
+<%# @questions.each do |question|%>
+<!--    <div class= "<%#= 'hidden' if question.hidden? %>">-->
+<!--    <p class="mb-sm"><%#= link_to "Вопрос #{question.id}", question_path(id: question.id)%></p>-->
+<!--    </div>-->
+<%# end %>
+
+
+<% @questions.each do |question| %>
+  <div class="mt-sm container">
+    <%= render question %>
+    <p class="mt-sm"><%= link_to "Вопрос #{question.id}", question_path(id: question.id)%></p>
+  </div>
+<% end %>
