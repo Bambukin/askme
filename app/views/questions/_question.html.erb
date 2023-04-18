@@ -16,6 +16,6 @@
     <%= button_to fa_icon('eye-slash'),
                   hide_question_path(question),
                   method: :put, title: 'Скрыть вопрос',
-                  form: {data: {turbo_confirm: 'Точно скрыть вопрос?'}} unless question.hidden %>
+                  form: {data: {turbo_confirm: 'Точно скрыть вопрос?'}} unless question.hidden? %>
   </div>
 </div>
