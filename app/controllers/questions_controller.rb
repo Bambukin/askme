@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  # skip_before_action :verify_authenticity_token
   before_action :set_question, only: %i[update hide show destroy edit]
 
   def show; end
@@ -16,13 +15,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.create(
-      question_params
-      # body: params[:question][:body],
-      # user_id: params[:question][:user_id]
-    )
+    question = Question.create(question_params)
 
-    # flash[:notice] = "Новый вопрос создан!"
     redirect_to question_path(question), notice: 'Новый вопрос создан!'
   end
 
