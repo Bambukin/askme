@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def new
     session[:current_time] = Time.now
-    debugger
     @user = User.new
   end
 
