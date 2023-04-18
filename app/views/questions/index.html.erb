@@ -15,13 +15,6 @@
   </h2>
 </div>
 
-<%# @questions.each do |question|%>
-<!--    <div class= "<%#= 'hidden' if question.hidden? %>">-->
-<!--    <p class="mb-sm"><%#= link_to "Вопрос #{question.id}", question_path(id: question.id)%></p>-->
-<!--    </div>-->
-<%# end %>
-
-
 <% @questions.each do |question| %>
   <div class="mt-sm container">
     <%= render question %>
