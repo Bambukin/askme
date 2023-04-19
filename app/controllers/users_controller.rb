@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-  end
+  before_action :set_user, only: %i[edit update destroy]
 
   def create
     @user = User.new(user_params)
@@ -15,13 +13,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
+  def destroy
+    @user.destroy
+
+    session.delete(:user_id)
+
+    redirect_to root_path, notice: 'Пользователь удалён'
+  end
+
+  def edit; end
+
+  def new
+    @user = User.new
   end
 
   def update
-    @user = User.find(params[:id])
-
     if @user.update(user_params)
       session[:user_id] = @user.id
       redirect_to root_path, notice: 'Данные пользователя обновлены!'
@@ -32,16 +38,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    session.delete(:user_id)
-
-    redirect_to root_path, notice: 'Пользователь удалён'
-  end
-
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(
