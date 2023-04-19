@@ -15,15 +15,24 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.create(question_params)
+    @question = Question.new(question_params)
+    if @question.save
+      redirect_to question_path(@question), notice: 'Новый вопрос создан!'
+    else
+      flash.now[:alert] = 'Ошибка при создании вопроса!'
 
-    redirect_to question_path(question), notice: 'Новый вопрос создан!'
+      render :new
+    end
   end
 
   def update
-    @question.update(question_params)
+    if @question.update(question_params)
+      redirect_to question_path(@question), notice: 'Вопрос отредактирован!'
+    else
+      flash.now[:alert] = 'Ошибка при редактировании!'
 
-    redirect_to question_path(@question), notice: 'Вопрос отредактирован!'
+      render :edit
+    end
   end
 
   def destroy

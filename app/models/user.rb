@@ -1,6 +1,11 @@
 class User < ApplicationRecord
-  validates :email, presence: true, uniqueness: true
   has_secure_password
+  validates :email, presence: true, uniqueness: true, email: true
+  validates :nickname,
+            presence: true,
+            uniqueness: true,
+            length: { maximum: 40 },
+            format: { with: /\A\w+\z/, message: "only allows latin letters, digits, and underscore" }
 
   before_save :downcase_nickname
 
