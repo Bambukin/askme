@@ -4,10 +4,18 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_params = params.require(:user).permit(:name, :nickname, :email, :password)
+    user_params = params.require(:user).permit(
+      :name, :nickname, :email, :password, :password_confirmation
+    )
 
-    session[:user_id] = User.create(user_params).id
+    @user = User.new(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
+    else
+      flash.now[:alert] = 'Вы неправильно заполнили поля формы регистрации!'
 
-    redirect_to root_path, notice: 'Вы успешно зарегистрировались!'
+      render :new
+    end
   end
 end
