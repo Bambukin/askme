@@ -1,5 +1,5 @@
-<div class="mb-sm <%= 'hidden' if question.hidden? %>">
-  <%= question.body %>
+<div class="pre-line mb-sm <%= 'hidden' if question.hidden? %>">
+  <%= sanitize question.body %>
 </div>
 
 <div class="text-sm question-footer">
