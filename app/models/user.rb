@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  DEFAULT_NAVBAR_COLOR = '#370617'
   has_secure_password
   validates :email, presence: true, uniqueness: true, email: true
   validates :nickname,
