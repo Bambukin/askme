@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy show]
+  before_action :authorize_user, only: %i[edit update destroy]
 
   def create
     @user = User.new(user_params)
@@ -34,7 +35,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      session[:user_id] = @user.id
       redirect_to root_path, notice: 'Данные пользователя обновлены!'
     else
       flash.now[:alert] = 'При попытке изменения данных возникла ошибка!'
@@ -44,6 +44,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    redirect_with_alert unless current_user == @user
+  end
 
   def set_user
     @user = User.find(params[:id])
