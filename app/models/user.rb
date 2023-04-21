@@ -8,6 +8,7 @@ class User < ApplicationRecord
     nickname.downcase!
   end
 
+  has_secure_password
   validates :email, presence: true, uniqueness: true, email: true
   validates :nickname,
             presence: true,
