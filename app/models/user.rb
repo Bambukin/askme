@@ -14,4 +14,6 @@ class User < ApplicationRecord
             uniqueness: true,
             length: { maximum: 40 },
             format: { with: /\A\w+\z/ }
+
+  has_many :questions
 end
