@@ -37,3 +37,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_195045) do
   end
 
 end
+
+# name: "Вадик",
+#   nickname: "bambukinator",
+#   email: "vadim@sorellia.pro",
+#   created_at: Thu, 20 Apr 2023 10:46:56.872241000 UTC +00:00,
+#   updated_at: Fri, 21 Apr 2023 17:05:41.969905000 UTC +00:00,
+#   password_digest: "[FILTERED]",
+#   navbar_color: "#370617">,
