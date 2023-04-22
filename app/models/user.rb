@@ -1,12 +1,7 @@
 class User < ApplicationRecord
   DEFAULT_NAVBAR_COLOR = '#370617'
+
   before_validation :downcase_nickname
-
-  private
-
-  def downcase_nickname
-    nickname.downcase!
-  end
 
   has_secure_password
   validates :email, presence: true, uniqueness: true, email: true
@@ -16,5 +11,11 @@ class User < ApplicationRecord
             length: { maximum: 40 },
             format: { with: /\A\w+\z/ }
 
-  has_many :questions
+  has_many :questions, dependent: :delete_all
+
+  private
+
+  def downcase_nickname
+    nickname.downcase!
+  end
 end
