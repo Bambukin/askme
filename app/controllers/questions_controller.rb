@@ -21,9 +21,11 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :user_id)
 
     @question = Question.new(question_params)
+    @question.author_id = current_user&.id
     if @question.save
       redirect_to user_path(@question.user), notice: 'Новый вопрос создан!'
     else
+      @user = @question.user
       flash.now[:alert] = 'Ошибка при создании вопроса!'
 
       render :new
@@ -50,8 +52,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
-    @question = Question.new(user: @user)
+    @question = User.find(params[:user_id]).questions.build
   end
 
   def edit; end

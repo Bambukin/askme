@@ -1,0 +1,12 @@
+
+<div class="container text-center">
+  <p class="title-sm text-gray">
+    У этого пользователя пока никто ничего не спросил
+  </p>
+
+  <div class="mt-lg mb-lg">
+    <%= image_tag "empty_states.png", alt: "Человек ждет вашего вопроса", class: "empty_states_img" %>
+  </div>
+
+  <%= link_to "Дай, спрошу!", new_question_path(user_id: user), class: 'button button-main' %>
+</div>
