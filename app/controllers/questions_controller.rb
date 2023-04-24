@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :user_id)
 
     @question = Question.new(question_params)
+    @question.author_id = current_user&.id
     if @question.save
       redirect_to user_path(@question.user), notice: 'Новый вопрос создан!'
     else

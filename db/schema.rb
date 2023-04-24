@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_195045) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_24_151503) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_195045) do
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false, null: false
     t.text "answer"
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_questions_on_author_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
@@ -35,4 +37,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_195045) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
   end
+
 end
