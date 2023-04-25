@@ -7,8 +7,8 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.all
-    @question = Question.new
+    @questions = Question.order(created_at: :desc).last(10)
+    @users = User.order(created_at: :desc).last(10)
   end
 
   def hide
@@ -21,7 +21,12 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :user_id)
 
     @question = Question.new(question_params)
-    @question.author_id = current_user&.id
+
+    @question.author_id = if current_user.present?
+                            current_user.id
+                          else
+                            nil
+                          end
     if @question.save
       redirect_to user_path(@question.user), notice: 'Новый вопрос создан!'
     else
