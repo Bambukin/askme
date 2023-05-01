@@ -19,10 +19,6 @@ class User < ApplicationRecord
   include Gravtastic
   gravtastic(secure: true, filetype: :png, size: 100, default: 'mp')
 
-  def to_param
-    nickname
-  end
-
   private
 
   def downcase_nickname
