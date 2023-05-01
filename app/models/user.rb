@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   DEFAULT_NAVBAR_COLOR = '#370617'.freeze
-  COLOR_REGEX = /\A#(\h{3}){1,2}\z/.freeze
+  COLOR_REGEX = /\A#\h{3}{1,2}\z/.freeze
 
   before_validation :downcase_nickname
 
