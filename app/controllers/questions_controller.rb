@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   def hide
     @question.update(hidden: true)
 
-    redirect_to user_path(@question.user), notice: 'Вопрос скрыт!'
+    redirect_to user_path(@question.user.nickname), notice: 'Вопрос скрыт!'
   end
 
   def create
@@ -22,9 +22,9 @@ class QuestionsController < ApplicationController
 
     @question = Question.new(question_params)
 
-    @question.author=(current_user)
+    @question.author= current_user
     if @question.save
-      redirect_to user_path(@question.user), notice: 'Новый вопрос создан!'
+      redirect_to user_path(@question.user.nickname), notice: 'Новый вопрос создан!'
     else
       @user = @question.user
       flash.now[:alert] = 'Ошибка при создании вопроса!'
@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :answer)
 
     if @question.update(question_params)
-      redirect_to user_path(@question.user), notice: 'Вопрос отредактирован!'
+      redirect_to user_path(@question.user.nickname), notice: 'Вопрос отредактирован!'
     else
       flash.now[:alert] = 'Ошибка при редактировании!'
 
@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
     @user = @question.user
     @question.destroy
 
-    redirect_to user_path(@user), notice: 'Вопрос удален!'
+    redirect_to user_path(@user.nickname), notice: 'Вопрос удален!'
   end
 
   def new
