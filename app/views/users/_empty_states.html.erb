@@ -8,5 +8,5 @@
     <%= image_tag "empty_states.png", alt: "Человек ждет вашего вопроса", class: "empty_states_img" %>
   </div>
 
-  <%= link_to "Дай, спрошу!", new_question_path(user_id: user), class: 'button button-main' %>
+  <%= link_to "Дай, спрошу!", new_question_path(nickname: @user.nickname), class: 'button button-main' %>
 </div>
