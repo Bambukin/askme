@@ -9,6 +9,10 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.order(created_at: :desc).first(10)
     @users = User.order(created_at: :desc).first(10)
+    @hashtags = Hashtag.left_outer_joins(:questions)
+                       .group(:id)
+                       .order('COUNT(questions.id) DESC')
+                       .first(10)
   end
 
   def hide
@@ -24,6 +28,7 @@ class QuestionsController < ApplicationController
     @question.author = current_user
 
     if @question.save
+      @question.hashtags = hashtags_scan(@question.body)
       redirect_to user_path(@question.user.nickname), notice: 'Новый вопрос создан!'
     else
       @user = @question.user
@@ -37,6 +42,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :answer)
 
     if @question.update(question_params)
+      @question.hashtags = hashtags_scan(@question.body << @question.answer)
       redirect_to user_path(@question.user.nickname), notice: 'Вопрос отредактирован!'
     else
       flash.now[:alert] = 'Ошибка при редактировании!'

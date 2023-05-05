@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_24_151503) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_134303) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["body"], name: "index_hashtags_on_body", unique: true
+  end
+
+  create_table "hashtags_questions", force: :cascade do |t|
+    t.bigint "hashtag_id"
+    t.bigint "question_id"
+    t.index ["hashtag_id"], name: "index_hashtags_questions_on_hashtag_id"
+    t.index ["question_id"], name: "index_hashtags_questions_on_question_id"
+  end
 
   create_table "questions", force: :cascade do |t|
     t.text "body", null: false

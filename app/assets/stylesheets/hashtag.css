@@ -1,0 +1,9 @@
+.hashtag {
+  background-color: lightgrey;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.hashtag a {
+  color: #03071E;
+}
