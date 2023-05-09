@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  HASHTAG_REGEX = /#[[:word:]-]+/.freeze
-
   helper_method :current_user
 
   private
@@ -10,17 +8,5 @@ class ApplicationController < ActionController::Base
 
   def redirect_with_alert
     redirect_to root_path, alert: 'Вам сюда нельзя!'
-  end
-
-  def hashtags_scan(text)
-    hashtags = text.scan(HASHTAG_REGEX).map(&:downcase).uniq
-    existing_hashtags = Hashtag.where(body: hashtags).pluck(:body)
-    new_hashtags = hashtags - existing_hashtags
-
-    new_hashtags.map do | hashtag |
-      Hashtag.create(body: hashtag)
-    end
-
-    Hashtag.where(body: hashtags)
   end
 end

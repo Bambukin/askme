@@ -5,12 +5,12 @@
 <% end %>
 
 <div class="pre-line mb-sm <%= 'hidden' if question.hidden? %>">
-  <%= sanitize question.body %>
+  <%= sanitize text_with_hashtags(question.body) %>
 </div>
 
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">
-    <%= sanitize question.answer %>
+    <%= sanitize text_with_hashtags(question.answer) %>
   </div>
 <% end %>
 
@@ -33,7 +33,4 @@
                     form: {data: {turbo_confirm: 'Точно скрыть вопрос?'}} unless question.hidden? %>
     </div>
   <% end %>
-</div>
-<div class="mt">
-  <%= render partial: :'hashtags/hashtag', collection: question.hashtags %>
 </div>

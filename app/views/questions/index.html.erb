@@ -10,14 +10,17 @@
   </div>
 </div>
 
-<div class="container mt-sm">
-  <h2 class="title-lg mb">
-    Популярные хештеги:
-  </h2>
+<% if @hashtags.present? %>
+  <div class="container mt-sm">
+    <h2 class="title-lg mb">
+      Популярные хештеги:
+    </h2>
     <% @hashtags.each do |hashtag| %>
       <%= render partial: 'hashtags/hashtag', locals: { hashtag: hashtag } %>
     <% end %>
-</div>
+  </div>
+<% end %>
+
 
 <div class="container mt-sm">
   <h2 class="title-lg">

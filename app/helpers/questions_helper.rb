@@ -7,4 +7,10 @@ module QuestionsHelper
       'anonim'
     end
   end
+
+  def text_with_hashtags(text)
+    strip_tags(text).gsub(Hashtag::HASHTAG_REGEX) do |ht|
+      link_to ht, hashtag_path(ht.delete('#').downcase), class: "italic"
+    end
+  end
 end

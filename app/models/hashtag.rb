@@ -1,11 +1,15 @@
 class Hashtag < ApplicationRecord
-  HASHTAG_REGEX = /\A#[[:word:]-]+\z/.freeze
+  HASHTAG_REGEX = /#[[:word:]-]+/.freeze
+
   has_and_belongs_to_many :questions
 
   before_validation :downcase_body
 
-  validates :body, format: { with: HASHTAG_REGEX }
+  scope :with_questions, -> { where_exists(:questions) }
 
+  validates :text, presence: true
+
+  private
   def downcase_body
     body&.downcase!
   end
