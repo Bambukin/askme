@@ -11,6 +11,7 @@ class Hashtag < ApplicationRecord
   validates :body, presence: true
 
   private
+
   def downcase_body
     body&.downcase!
   end

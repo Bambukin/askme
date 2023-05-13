@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
     @questions = Question.includes(:user, :author).order(created_at: :desc).first(10)
     @users = User.order(created_at: :desc).first(10)
     @hashtags = Hashtag.with_questions
-                       .left_outer_joins(:questions)
+                       .joins(:questions)
                        .group(:id)
                        .order('COUNT(questions.id) DESC')
                        .first(10)

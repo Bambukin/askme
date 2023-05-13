@@ -29,8 +29,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @questions = @user.questions.includes(:user, :author).order(created_at: :desc)
-    @question = Question.new(user: @user)
+    if @user
+      @questions = @user.questions.includes(:user, :author).order(created_at: :desc)
+      @question = Question.new(user: @user)
+    else
+      render file: "#{Rails.root}/public/404.html"
+    end
   end
 
   def update
