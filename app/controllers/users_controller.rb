@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       @questions = @user.questions.includes(:user, :author).order(created_at: :desc)
       @question = Question.new(user: @user)
     else
-      render file: "#{Rails.root}/public/404.html"
+      send_file "#{Rails.root}/public/404.html", type: 'text/html', disposition: 'inline'
     end
   end
 
