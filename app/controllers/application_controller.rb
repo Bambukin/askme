@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def redirect_with_alert
     redirect_to root_path, alert: 'Вам сюда нельзя!'
   end
+
+  def not_found
+    render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
+  end
 end

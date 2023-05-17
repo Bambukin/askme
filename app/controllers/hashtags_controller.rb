@@ -4,7 +4,7 @@ class HashtagsController < ApplicationController
     if @hashtag
       @questions = @hashtag.questions.includes(:user, :author)
     else
-      send_file "#{Rails.root}/public/404.html", type: 'text/html', disposition: 'inline'
+      not_found
     end
   end
 end
