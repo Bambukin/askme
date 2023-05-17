@@ -17,6 +17,7 @@ gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'where_exists'
+gem "recaptcha"
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]

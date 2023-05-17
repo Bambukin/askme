@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author = current_user
 
-    if QuestionSave.(question: @question, params: question_params)
+    if check_captcha(@question) && QuestionSave.(question: @question, params: question_params)
       redirect_to user_path(@question.user.nickname), notice: 'Новый вопрос создан!'
     else
       @user = @question.user
@@ -71,5 +71,9 @@ class QuestionsController < ApplicationController
 
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
+  end
+
+  def check_captcha(model)
+    current_user.present? ? true : verify_recaptcha(model: model)
   end
 end
