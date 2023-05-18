@@ -29,12 +29,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    if @user
-      @questions = @user.questions.includes(:user, :author).order(created_at: :desc)
-      @question = Question.new(user: @user)
-    else
-      not_found
-    end
+    @questions = @user.questions.includes(:user, :author).order(created_at: :desc)
+    @question = Question.new(user: @user)
   end
 
   def update
@@ -54,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(nickname: params[:nickname])
+    @user = User.find_by!(nickname: params[:nickname])
   end
 
   def user_params
