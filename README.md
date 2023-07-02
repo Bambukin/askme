@@ -1,24 +1,28 @@
-# README
+# ASKME
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+___
 
-Things you may want to cover:
+It's an application made for learning purposes. 
 
-* Ruby version
+It's a social network that allows you to ask and answer questions
+from other people and receive answers.  
+(similar to askfm)
 
-* System dependencies
+You can see an example on my website https://askme.sorellia.pro
 
-* Configuration
+```
+Ruby version - 3.2.1
+Rails version - 7.0.5
+```
 
-* Database creation
+App language: Russian
 
-* Database initialization
+Execute the following line in the console to run the program:
 
-* How to run the test suite
+```
+bundle install
 
-* Services (job queues, cache servers, search engines, etc.)
+rails db:migrate
 
-* Deployment instructions
-
-* ...
+rails s
+```

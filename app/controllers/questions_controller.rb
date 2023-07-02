@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author = current_user
 
-    if check_captcha(@question) && QuestionSave.(question: @question, params: question_params)
+    if check_captcha(@question) && QuestionSave.call(question: @question, params: question_params)
       redirect_to user_path(@question.user.nickname), notice: 'Новый вопрос создан!'
     else
       @user = @question.user
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
   def update
     question_params = params.require(:question).permit(:body, :answer)
 
-    if QuestionSave.(question: @question, params: question_params)
+    if QuestionSave.call(question: @question, params: question_params)
       redirect_to user_path(@question.user.nickname), notice: 'Вопрос отредактирован!'
     else
       flash.now[:alert] = 'Ошибка при редактировании!'
@@ -74,6 +74,6 @@ class QuestionsController < ApplicationController
   end
 
   def check_captcha(model)
-    current_user.present? ? true : verify_recaptcha(model: model)
+    current_user.present? ? true : verify_recaptcha(model:)
   end
 end

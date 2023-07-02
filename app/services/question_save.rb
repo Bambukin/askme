@@ -17,11 +17,11 @@ class QuestionSave
       question.save!
 
       question.hashtags =
-        "#{question.body} #{question.answer}".
-          downcase.
-          scan(Hashtag::HASHTAG_REGEX).
-          uniq.
-          map { |ht| Hashtag.create_or_find_by!(body: ht.delete('#')) }
+        "#{question.body} #{question.answer}"
+        .downcase
+        .scan(Hashtag::HASHTAG_REGEX)
+        .uniq
+        .map { |ht| Hashtag.create_or_find_by!(body: ht.delete('#')) }
 
       true
     rescue ActiveRecord::RecordInvalid

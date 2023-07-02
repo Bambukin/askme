@@ -2,8 +2,8 @@ class User < ApplicationRecord
   include Gravtastic
 
   DEFAULT_NAVBAR_COLOR = '#370617'.freeze
-  COLOR_REGEX = /\A#\h{3}{1,2}\z/.freeze
-  NICKNAME_REGEX = /\A\w+\z/.freeze
+  COLOR_REGEX = /\A#\h{3}{1,2}\z/
+  NICKNAME_REGEX = /\A\w+\z/
 
   has_many :questions, dependent: :delete_all
   has_many :authored_questions, class_name: 'Question', foreign_key: :author_id, dependent: :nullify

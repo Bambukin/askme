@@ -1,5 +1,5 @@
 class Hashtag < ApplicationRecord
-  HASHTAG_REGEX = /#[[:word:]-]+/.freeze
+  HASHTAG_REGEX = /#[[:word:]-]+/
 
   has_many :hashtags_questions, dependent: :destroy
   has_many :questions, through: :hashtags_questions
