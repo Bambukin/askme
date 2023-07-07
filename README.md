@@ -17,6 +17,9 @@ Rails version - 7.0.5
 
 App language: Russian
 
+Before running you need to add `:recaptcha,:site_key` and `:recaptcha, :secret_key` for recaptcha to your credentials.  
+Visit [Recaptcha](https://developers.google.com/recaptcha?hl=en "Recaptcha") for more information.  
+
 Execute the following line in the console to run the program:
 
 ```
